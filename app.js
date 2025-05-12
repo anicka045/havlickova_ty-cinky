@@ -10,29 +10,37 @@ const products = [
 function loadProducts() {
   const container = document.getElementById('products');
   container.innerHTML = '';
-  products.forEach(p => {
+  products.forEach((p, index) => {
     const item = document.createElement('div');
     item.innerHTML = `
       <strong>${p.name}</strong><br>
       ${p.price} Kč
-      <button onclick='addToCart(${JSON.stringify(p)})'>Přidat do košíku</button>
+      <button onclick='addToCart(${index})'>Přidat do košíku</button>
       <hr>
     `;
     container.appendChild(item);
   });
 }
 
-function addToCart(product) {
-  cart.push(product);
+function addToCart(index) {
+  cart.push(products[index]);
+  updateCart();
+}
+
+function removeFromCart(index) {
+  cart.splice(index, 1);
   updateCart();
 }
 
 function updateCart() {
   const cartDiv = document.getElementById('cart');
   cartDiv.innerHTML = '';
-  cart.forEach(p => {
+  cart.forEach((p, i) => {
     const item = document.createElement('div');
-    item.textContent = `${p.name} - ${p.price} Kč`;
+    item.innerHTML = `
+      ${p.name} - ${p.price} Kč
+      <button onclick='removeFromCart(${i})'>Odebrat</button>
+    `;
     cartDiv.appendChild(item);
   });
 }
@@ -41,9 +49,16 @@ function checkout() {
   document.getElementById('addressForm').style.display = 'block';
 }
 
-async function submitOrder() {
+function submitOrder() {
   const address = document.getElementById('address').value;
+  if (!address) {
+    alert('Zadejte prosím adresu.');
+    return;
+  }
   alert(`Objednávka odeslána na adresu: ${address}`);
+  cart = [];
+  updateCart();
+  document.getElementById('addressForm').style.display = 'none';
 }
 
 window.onload = loadProducts;

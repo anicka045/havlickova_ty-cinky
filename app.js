@@ -1,13 +1,23 @@
 let cart = [];
 
-async function loadProducts() {
-  const res = await fetch('/api/products');
-  const products = await res.json();
+const products = [
+  { name: 'Činka 10 kg', price: 700 },
+  { name: 'Činka 15 kg', price: 1050 },
+  { name: 'Činka 20 kg', price: 1400 },
+  { name: 'Činka 25 kg', price: 1750 }
+];
+
+function loadProducts() {
   const container = document.getElementById('products');
   container.innerHTML = '';
   products.forEach(p => {
     const item = document.createElement('div');
-    item.innerHTML = `${p.name} - $${p.price} <button onclick='addToCart(${JSON.stringify(p)})'>Add</button>`;
+    item.innerHTML = `
+      <strong>${p.name}</strong><br>
+      ${p.price} Kč
+      <button onclick='addToCart(${JSON.stringify(p)})'>Přidat do košíku</button>
+      <hr>
+    `;
     container.appendChild(item);
   });
 }
@@ -22,7 +32,7 @@ function updateCart() {
   cartDiv.innerHTML = '';
   cart.forEach(p => {
     const item = document.createElement('div');
-    item.textContent = p.name + ' - $' + p.price;
+    item.textContent = `${p.name} - ${p.price} Kč`;
     cartDiv.appendChild(item);
   });
 }
@@ -33,13 +43,7 @@ function checkout() {
 
 async function submitOrder() {
   const address = document.getElementById('address').value;
-  const res = await fetch('/api/order', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ address, items: cart })
-  });
-  const data = await res.json();
-  if (data.success) alert('Order placed!');
+  alert(`Objednávka odeslána na adresu: ${address}`);
 }
 
-loadProducts();
+window.onload = loadProducts;

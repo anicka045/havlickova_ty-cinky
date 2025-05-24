@@ -9,6 +9,10 @@ h1, h2 {
   color: #3a1d6f;
 }
 
+h1 {
+  text-align: center;
+}
+
 .products-grid {
   display: flex;
   gap: 15px;

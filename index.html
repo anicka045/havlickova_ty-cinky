@@ -167,7 +167,7 @@
     <h2>Košík</h2>
     <div id="cart-items"></div>
     <div id="total"></div>
-    <button id="proceed">Pokračovat k objednávce</button>
+    <button onclick="window.location.href='order.html'">Pokračovat k objednávce</button>
   </div>
 </div>
 
@@ -314,9 +314,6 @@
   renderProducts();
   renderCart();
 
- document.getElementById("proceed").addEventListener("click", function () {
-    window.location.href = "order.html";
-  });
 
 </script>
 

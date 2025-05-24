@@ -3,49 +3,126 @@
 <head>
   <meta charset="UTF-8" />
   <title>Objednávka</title>
-  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      background: #e8dff7;  /* světle fialová */
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #4b2c83;
+      margin: 20px;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+    }
+
+    form {
+      background: #fff;  /* bílý podklad jen u formuláře */
+      max-width: 400px;
+      width: 100%;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(75, 44, 131, 0.25);
+      box-sizing: border-box;
+    }
+
+    h1 {
+      text-align: center;
+      color: #3a1d6f;
+      margin-bottom: 30px;
+    }
+
+    label {
+      display: block;
+      margin: 15px 0 6px;
+      font-weight: 600;
+      color: #563d99;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    select,
+    textarea {
+      width: 100%;
+      max-width: 100%;
+      padding: 7px 10px;
+      border-radius: 6px;
+      border: 1px solid #a59ad1;
+      font-size: 1em;
+      box-sizing: border-box;
+      color: #4b2c83;
+      font-weight: 600;
+    }
+
+    input[type="text"][name="name"],
+    input[type="text"][name="surname"] {
+      max-width: 250px;
+    }
+
+    input[type="email"] {
+      max-width: 300px;
+    }
+
+    textarea {
+      max-width: 100%;
+      max-height: 90px;
+      resize: vertical;
+      font-weight: 600;
+    }
+
+    button {
+      background: #7a56d9;
+      border: none;
+      padding: 10px 16px;
+      color: white;
+      font-weight: 700;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 20px;
+      width: 100%;
+      font-size: 1.1em;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background: #5e3bbb;
+    }
+  </style>
 </head>
 <body>
-  <h1>Vyplň údaje k objednávce</h1>
-
   <form id="orderForm">
-    <label>
-      Jméno:
-      <input type="text" name="name" required />
-    </label>
-    <label>
-      Příjmení:
-      <input type="text" name="surname" required />
-    </label>
-    <label>
-      E-mail:
-      <input type="email" name="email" required />
-    </label>
-    <label>
-      Adresa doručení:
-      <textarea name="address" required></textarea>
-    </label>
+    <h1>Vyplň údaje k objednávce</h1>
+
+    <label for="name">Jméno:</label>
+    <input type="text" id="name" name="name" required maxlength="30" />
+
+    <label for="surname">Příjmení:</label>
+    <input type="text" id="surname" name="surname" required maxlength="30" />
+
+    <label for="email">E-mail:</label>
+    <input type="email" id="email" name="email" required maxlength="50" />
+
+    <label for="address">Adresa doručení:</label>
+    <textarea id="address" name="address" required maxlength="200"></textarea>
 
     <label for="postcode">PSČ:</label>
     <input
-        type="text"
-        id="postcode"
-        name="postcode"
-        required
-        maxlength="5"
-        pattern="\d{5}"
-        title="Zadejte PSČ"
+      type="text"
+      id="postcode"
+      name="postcode"
+      required
+      maxlength="5"
+      pattern="\d{5}"
+      title="Zadejte PSČ ve formátu 5 číslic"
     />
 
-    <label>
-      Platební metoda:
-      <select name="payment" required>
-        <option value="">Vyberte</option>
-        <option value="dobirka">Dobírka</option>
-        <option value="prevod">Bankovní převod</option>
-        <option value="kartou">Platba kartou</option>
-      </select>
-    </label>
+    <label for="payment">Platební metoda:</label>
+    <select id="payment" name="payment" required>
+      <option value="">Vyberte</option>
+      <option value="dobirka">Dobírka</option>
+      <option value="prevod">Bankovní převod</option>
+      <option value="kartou">Platba kartou</option>
+    </select>
+
     <button type="submit">Potvrdit objednávku</button>
   </form>
 

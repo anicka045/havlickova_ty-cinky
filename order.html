@@ -4,56 +4,54 @@
   <meta charset="UTF-8" />
   <title>Objednávka</title>
   <style>
-    body {
+    html, body {
+      margin: 0; padding: 0; height: 100%;
       background: #e8dff7;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       color: #4b2c83;
-      margin: 0;
-      min-height: 100vh;
       display: flex;
       justify-content: center;
-      align-items: flex-start;
-      padding: 20px;
+      align-items: center;
+      flex-direction: column;
     }
 
     header {
       background: white;
       width: 900px;
-      padding: 15px 0;
+      padding: 20px 0;
       margin-bottom: 20px;
       border-radius: 12px;
       box-shadow: 0 0 15px rgba(75, 44, 131, 0.15);
       text-align: center;
       color: #3a1d6f;
       font-weight: 700;
-      font-size: 2em;
+      font-size: 2.2em;
       user-select: none;
     }
 
     form {
-      background: #fff;
-      max-width: 900px;
-      width: 100%;
-      padding: 25px;
+      background: white;
+      width: 900px;
+      padding: 30px 40px;
       border-radius: 12px;
       box-shadow: 0 0 15px rgba(75, 44, 131, 0.25);
-      box-sizing: border-box;
       display: flex;
-      gap: 30px;
+      gap: 40px;
+      box-sizing: border-box;
     }
 
     .column {
       flex: 1;
       display: flex;
       flex-direction: column;
-      align-items: flex-start; /* zarovnání doleva */
+      align-items: flex-start;
     }
 
     label {
       margin: 10px 0 6px;
       font-weight: 600;
       color: #563d99;
-      align-self: flex-start; /* zaručí levé zarovnání i u label */
+      align-self: flex-start;
     }
 
     input[type="text"],
@@ -61,13 +59,13 @@
     select,
     textarea {
       width: 100%;
-      padding: 7px 10px;
+      padding: 8px 12px;
       border-radius: 6px;
       border: 1px solid #a59ad1;
       font-size: 1em;
-      box-sizing: border-box;
       color: #4b2c83;
       font-weight: 600;
+      box-sizing: border-box;
       resize: vertical;
     }
 
@@ -87,12 +85,12 @@
     button {
       background: #7a56d9;
       border: none;
-      padding: 12px 16px;
+      padding: 14px 0;
       color: white;
       font-weight: 700;
       border-radius: 6px;
       cursor: pointer;
-      margin-top: auto; /* tlačítko dole v pravém sloupci */
+      margin-top: auto;
       font-size: 1.1em;
       transition: background 0.3s ease;
       width: 100%;
@@ -104,14 +102,13 @@
 
     #orderSummary {
       background: #f6f0fc;
-      padding: 15px;
+      padding: 20px;
       border-radius: 8px;
       font-weight: 600;
       font-size: 1em;
       color: #3a1d6f;
       max-height: 300px;
       overflow-y: auto;
-      margin-top: 20px;
       width: 100%;
     }
 
@@ -137,90 +134,91 @@
   </style>
 </head>
 <body>
-  <header>Vyplň údaje k objednávce</header>
 
-  <form id="orderForm">
-    <div class="column">
-      <label for="name">Jméno:</label>
-      <input type="text" id="name" name="name" required maxlength="30" />
+<header>Vyplň údaje k objednávce</header>
 
-      <label for="surname">Příjmení:</label>
-      <input type="text" id="surname" name="surname" required maxlength="30" />
+<form id="orderForm">
+  <div class="column">
+    <label for="name">Jméno:</label>
+    <input type="text" id="name" name="name" required maxlength="30" />
 
-      <label for="email">E-mail:</label>
-      <input type="email" id="email" name="email" required maxlength="50" />
+    <label for="surname">Příjmení:</label>
+    <input type="text" id="surname" name="surname" required maxlength="30" />
 
-      <label for="address">Adresa doručení:</label>
-      <textarea id="address" name="address" required maxlength="200"></textarea>
+    <label for="email">E-mail:</label>
+    <input type="email" id="email" name="email" required maxlength="50" />
 
-      <label for="postcode">PSČ:</label>
-      <input
-        type="text"
-        id="postcode"
-        name="postcode"
-        required
-        maxlength="5"
-        pattern="\d{5}"
-        title="Zadejte PSČ"
-      />
+    <label for="address">Adresa doručení:</label>
+    <textarea id="address" name="address" required maxlength="200"></textarea>
+
+    <label for="postcode">PSČ:</label>
+    <input
+      type="text"
+      id="postcode"
+      name="postcode"
+      required
+      maxlength="5"
+      pattern="\d{5}"
+      title="Zadejte PSČ ve formátu 5 číslic"
+    />
+  </div>
+
+  <div class="column">
+    <label for="payment">Platební metoda:</label>
+    <select id="payment" name="payment" required>
+      <option value="">Vyberte</option>
+      <option value="dobirka">Dobírka</option>
+      <option value="prevod">Bankovní převod</option>
+      <option value="kartou">Platba kartou</option>
+    </select>
+
+    <div id="orderSummary">
+      <h2>Souhrn objednávky</h2>
+      <ul id="summaryList"></ul>
+      <p><strong>Celkem: <span id="totalPrice">0</span> Kč</strong></p>
     </div>
 
-    <div class="column">
-      <label for="payment">Platební metoda:</label>
-      <select id="payment" name="payment" required>
-        <option value="">Vyberte</option>
-        <option value="dobirka">Dobírka</option>
-        <option value="prevod">Bankovní převod</option>
-        <option value="kartou">Platba kartou</option>
-      </select>
+    <button type="submit">Potvrdit objednávku</button>
+  </div>
+</form>
 
-      <div id="orderSummary">
-        <h2>Souhrn objednávky</h2>
-        <ul id="summaryList"></ul>
-        <p><strong>Celkem: <span id="totalPrice">0</span> Kč</strong></p>
-      </div>
+<script>
+  const cart = JSON.parse(sessionStorage.getItem("cart") || "[]");
 
-      <button type="submit">Potvrdit objednávku</button>
-    </div>
-  </form>
+  if (!cart.length) {
+    alert("Košík je prázdný, vraťte se na hlavní stránku.");
+    window.location.href = "index.html";
+  }
 
-  <script>
-    const cart = JSON.parse(sessionStorage.getItem("cart") || "[]");
+  const summaryList = document.getElementById("summaryList");
+  const totalPriceEl = document.getElementById("totalPrice");
+  let total = 0;
 
-    if (!cart.length) {
-      alert("Košík je prázdný, vraťte se na hlavní stránku.");
-      window.location.href = "index.html";
-    }
+  cart.forEach((item) => {
+    const li = document.createElement("li");
+    li.textContent = `${item.name} — ${item.weight} kg — ${item.price} Kč`;
+    summaryList.appendChild(li);
+    total += item.price;
+  });
 
-    const summaryList = document.getElementById("summaryList");
-    const totalPriceEl = document.getElementById("totalPrice");
-    let total = 0;
+  totalPriceEl.textContent = total;
 
-    cart.forEach((item) => {
-      const li = document.createElement("li");
-      li.textContent = `${item.name} — ${item.weight} kg — ${item.price} Kč`;
-      summaryList.appendChild(li);
-      total += item.price;
-    });
+  document.getElementById("orderForm").onsubmit = (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const data = {};
+    formData.forEach((v, k) => (data[k] = v));
 
-    totalPriceEl.textContent = total;
+    // Tady můžeš přidat odeslání do Firebase
 
-    document.getElementById("orderForm").onsubmit = (e) => {
-      e.preventDefault();
-      const formData = new FormData(e.target);
-      const data = {};
-      formData.forEach((v, k) => (data[k] = v));
+    alert(
+      "Souhrn objednávky a údaje k platbě byly odeslány na váš e-mail.\n\n" +
+        "Děkujeme za nákup!"
+    );
+    sessionStorage.removeItem("cart");
+    window.location.href = "index.html";
+  };
+</script>
 
-      // Zde můžeš přidat kód na odeslání objednávky do backendu (Firebase apod.)
-      console.log("Objednávka:", data, cart);
-
-      alert(
-        "Souhrn objednávky a údaje k platbě byly odeslány na váš e-mail.\n\n" +
-          "Děkujeme za nákup!"
-      );
-      sessionStorage.removeItem("cart");
-      window.location.href = "index.html";
-    };
-  </script>
 </body>
 </html>

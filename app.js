@@ -51,7 +51,7 @@ function updateCart() {
 }
 
 function checkout() {
-  document.getElementById('addressForm').style.display = 'block';
+  window.location.href = 'checkout.html';
 }
 
 function submitOrder() {

@@ -50,13 +50,11 @@
         createdAt: new Date().toISOString()
       };
 
-      fetch('https://havlickova-ty-cinky-default-rtdb.europe-west1.firebasedatabase.app/orders.json', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(order)
-      })
+      fetch('/api/order', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify(order)
+})
       .then(res => {
         if (res.ok) {
           alert(`Souhrn objednávky byl zaslán na e-mail: ${email}.\nUhraďte prosím objednávku podle pokynů v e-mailu.`);

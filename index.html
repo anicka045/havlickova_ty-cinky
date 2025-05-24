@@ -1,16 +1,13 @@
 <!DOCTYPE html>
 <html lang="cs">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <title>Činky e-shop</title>
-  <style>
-    body { font-family: sans-serif; max-width: 600px; margin: auto; }
-    .product { border: 1px solid #ccc; margin: 10px 0; padding: 10px; }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <h1>Vyber si činky</h1>
-  <div id="products"></div>
+  <div class="products-grid" id="products"></div>
 
   <h2>Košík</h2>
   <ul id="cartList"></ul>
@@ -19,9 +16,24 @@
 
   <script type="module">
     const products = [
-      { id: 1, name: "Činka 5kg", price: 700 },
-      { id: 2, name: "Činka 10kg", price: 1400 },
-      { id: 3, name: "Činka 15kg", price: 1700 }
+      {
+        id: 1,
+        name: "Činka 5 kg",
+        price: 1200,
+        img: "https://cdn.pixabay.com/photo/2017/08/06/00/37/dumbbell-2582916_960_720.jpg"
+      },
+      {
+        id: 2,
+        name: "Činka 10 kg",
+        price: 2200,
+        img: "https://cdn.pixabay.com/photo/2015/07/02/10/11/dumbbells-828726_960_720.jpg"
+      },
+      {
+        id: 3,
+        name: "Činka 15 kg",
+        price: 3000,
+        img: "https://cdn.pixabay.com/photo/2016/12/06/09/31/fitness-1882721_960_720.jpg"
+      }
     ];
 
     let cart = [];
@@ -35,8 +47,11 @@
       products.forEach(p => {
         const div = document.createElement('div');
         div.className = 'product';
-        div.innerHTML = `<b>${p.name}</b> – ${p.price} Kč 
-          <button onclick="addToCart(${p.id})">Přidat</button>`;
+        div.innerHTML = `
+          <img src="${p.img}" alt="${p.name}">
+          <div class="product-name">${p.name}</div>
+          <div class="product-price">${p.price} Kč</div>
+          <button onclick="addToCart(${p.id})">Přidat do košíku</button>`;
         productsDiv.appendChild(div);
       });
     }

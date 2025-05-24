@@ -1,51 +1,66 @@
 <!DOCTYPE html>
 <html lang="cs">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Objednávka</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <h1>Vyplňte údaje k objednávce</h1>
+  <h1>Vyplň údaje k objednávce</h1>
+
   <form id="orderForm">
-    <label>Jméno: <input id="name" required></label><br>
-    <label>Příjmení: <input id="surname" required></label><br>
-    <label>Email: <input type="email" id="email" required></label><br>
-    <label>Adresa: <input id="address" required></label><br>
-    <label>Platba:
-      <select id="payment" required>
+    <label>
+      Jméno:
+      <input type="text" name="name" required />
+    </label>
+    <label>
+      Příjmení:
+      <input type="text" name="surname" required />
+    </label>
+    <label>
+      E-mail:
+      <input type="email" name="email" required />
+    </label>
+    <label>
+      Adresa doručení:
+      <textarea name="address" required></textarea>
+    </label>
+    <label>
+      Platební metoda:
+      <select name="payment" required>
         <option value="">Vyberte</option>
         <option value="dobirka">Dobírka</option>
         <option value="prevod">Bankovní převod</option>
+        <option value="kartou">Platba kartou</option>
       </select>
-    </label><br><br>
-    <button type="submit">Odeslat</button>
+    </label>
+    <button type="submit">Potvrdit objednávku</button>
   </form>
 
-  <script type="module">
-    import { db, ref, push } from './firebase.js';
+  <script>
+    const cart = JSON.parse(sessionStorage.getItem("cart") || "[]");
 
-    document.getElementById('orderForm').addEventListener('submit', async (e) => {
+    if (!cart.length) {
+      alert("Košík je prázdný, vraťte se na hlavní stránku.");
+      window.location.href = "index.html";
+    }
+
+    document.getElementById("orderForm").onsubmit = (e) => {
       e.preventDefault();
+      const formData = new FormData(e.target);
+      const data = {};
+      formData.forEach((v, k) => (data[k] = v));
 
-      const cart = JSON.parse(sessionStorage.getItem('cart') || '[]');
-      if (cart.length === 0) return alert("Košík je prázdný");
+      // Pro ukázku - zpracování objednávky zde (např. odeslat na backend)
+      console.log("Objednávka:", data, cart);
 
-      const data = {
-        name: name.value,
-        surname: surname.value,
-        email: email.value,
-        address: address.value,
-        payment: payment.value,
-        cart: cart,
-        createdAt: new Date().toISOString()
-      };
-
-      await push(ref(db, 'orders'), data);
-
-      alert("Objednávka byla odeslána a údaje zaslány na e-mail.");
-      sessionStorage.clear();
-      window.location.href = 'index.html';
-    });
+      alert(
+        "Souhrn objednávky a údaje k platbě byly odeslány na váš e-mail.\n\n" +
+          "Děkujeme za nákup!"
+      );
+      sessionStorage.removeItem("cart");
+      window.location.href = "index.html";
+    };
   </script>
 </body>
 </html>

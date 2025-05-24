@@ -1,8 +1,12 @@
 export default async function handler(req, res) {
+  if (req.method !== 'POST') {
+    return res.status(405).json({ error: 'Pouze POST metoda je povolena' });
+  }
+
   try {
     const { address, items } = req.body;
 
-    const firebaseUrl = process.env.FIREBASE_PROJECT_ID+'/orders.json';
+    const firebaseUrl = process.env.FIREBASE_PROJECT_ID + '/orders.json';
 
     const response = await fetch(firebaseUrl, {
       method: 'POST',

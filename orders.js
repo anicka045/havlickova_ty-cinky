@@ -1,6 +1,16 @@
 export default async function handler(req, res) {
+  if (req.method !== 'GET') {
+    return res.status(405).json({ error: 'Pouze GET metoda je povolena' });
+  }
+
+  // Jednoduchá autorizace přes token v hlavičce
+  const auth = req.headers.authorization;
+  if (!auth || auth !== `Bearer ${process.env.ADMIN_TOKEN}`) {
+    return res.status(401).json({ error: 'Neautorizovaný přístup' });
+  }
+
   try {
-    const firebaseUrl = process.env.FIREBASE_PROJECT_ID+'/orders.json';
+    const firebaseUrl = process.env.FIREBASE_PROJECT_ID + '/orders.json';
 
     const response = await fetch(firebaseUrl);
     if (!response.ok) {

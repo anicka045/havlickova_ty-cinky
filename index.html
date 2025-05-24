@@ -142,12 +142,18 @@
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
   }
   canvas {
     background: white;
     border-radius: 10px;
     box-shadow: 0 3px 12px rgb(75 63 114 / 0.3);
-    max-width: 100%;
+    max-width: 600px;
+    max-height: 300px;
+    width: 100%;
+    height: auto;
   }
 </style>
 </head>
@@ -284,8 +290,14 @@
         label: 'Počet kusů v košíku',
         data: [],
         backgroundColor: [
-          '#b19cd9', '#d9b1d1', '#a0d9b1', '#d9d1b1',
-          '#9cadd9', '#d19cb1', '#b1d9a0', '#d9b19c'
+          '#e74c3c', // červená
+          '#3498db', // modrá
+          '#27ae60', // zelená
+          '#f1c40f', // žlutá
+          '#e67e22', // oranžová
+          '#8e44ad', // fialová
+          '#1abc9c', // tyrkysová
+          '#6e2c00'  // hnědá
         ],
         borderWidth: 1,
       }]

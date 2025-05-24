@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin – Přehled objednávek</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <h1>Počet objednávek podle dne</h1>
+  <canvas id="ordersChart" width="600" height="300"></canvas>
+
+  <script type="module">
+    import { db, ref, get, child } from './firebase.js';
+
+    const snapshot = await get(child(ref(db), 'orders'));
+
+    const countByDate = {};
+
+    snapshot.forEach(orderSnap => {
+      const order = orderSnap.val();
+      const date = order.createdAt?.split('T')[0];
+      if (date) {
+        countByDate[date] = (countByDate[date] || 0) + 1;
+      }
+    });
+
+    const labels = Object.keys(countByDate);
+    const data = Object.values(countByDate);
+
+    new Chart(document.getElementById('ordersChart'), {
+      type: 'bar',
+      data: {
+        labels: labels,
+        datasets: [{
+          label: 'Počet objednávek',
+          data: data,
+          backgroundColor: 'rgba(54, 162, 235, 0.6)',
+          borderColor: 'blue',
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          y: { beginAtZero: true }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

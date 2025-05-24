@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <title>Objednávka</title>
+</head>
+<body>
+  <h1>Vyplňte údaje k objednávce</h1>
+  <form id="orderForm">
+    <label>Jméno: <input id="name" required></label><br>
+    <label>Příjmení: <input id="surname" required></label><br>
+    <label>Email: <input type="email" id="email" required></label><br>
+    <label>Adresa: <input id="address" required></label><br>
+    <label>Platba:
+      <select id="payment" required>
+        <option value="">Vyberte</option>
+        <option value="dobirka">Dobírka</option>
+        <option value="prevod">Bankovní převod</option>
+      </select>
+    </label><br><br>
+    <button type="submit">Odeslat</button>
+  </form>
+
+  <script type="module">
+    import { db, ref, push } from './firebase.js';
+
+    document.getElementById('orderForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const cart = JSON.parse(sessionStorage.getItem('cart') || '[]');
+      if (cart.length === 0) return alert("Košík je prázdný");
+
+      const data = {
+        name: name.value,
+        surname: surname.value,
+        email: email.value,
+        address: address.value,
+        payment: payment.value,
+        cart: cart,
+        createdAt: new Date().toISOString()
+      };
+
+      await push(ref(db, 'orders'), data);
+
+      alert("Objednávka byla odeslána a údaje zaslány na e-mail.");
+      sessionStorage.clear();
+      window.location.href = 'index.html';
+    });
+  </script>
+</body>
+</html>

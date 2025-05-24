@@ -5,7 +5,7 @@
   <title>Objednávka</title>
   <style>
     body {
-      background: #e8dff7;  /* světle fialová */
+      background: #e8dff7;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       color: #4b2c83;
       margin: 20px;
@@ -16,24 +16,32 @@
     }
 
     form {
-      background: #fff;  /* bílý podklad jen u formuláře */
-      max-width: 400px;
+      background: #fff;
+      max-width: 900px;
       width: 100%;
       padding: 25px;
       border-radius: 12px;
       box-shadow: 0 0 15px rgba(75, 44, 131, 0.25);
       box-sizing: border-box;
+      display: flex;
+      gap: 30px;
+    }
+
+    .column {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
     }
 
     h1 {
       text-align: center;
       color: #3a1d6f;
       margin-bottom: 30px;
+      width: 100%;
     }
 
     label {
-      display: block;
-      margin: 15px 0 6px;
+      margin: 10px 0 6px;
       font-weight: 600;
       color: #563d99;
     }
@@ -43,7 +51,6 @@
     select,
     textarea {
       width: 100%;
-      max-width: 100%;
       padding: 7px 10px;
       border-radius: 6px;
       border: 1px solid #a59ad1;
@@ -51,6 +58,7 @@
       box-sizing: border-box;
       color: #4b2c83;
       font-weight: 600;
+      resize: vertical;
     }
 
     input[type="text"][name="name"],
@@ -63,28 +71,55 @@
     }
 
     textarea {
-      max-width: 100%;
       max-height: 90px;
-      resize: vertical;
-      font-weight: 600;
     }
 
     button {
       background: #7a56d9;
       border: none;
-      padding: 10px 16px;
+      padding: 12px 16px;
       color: white;
       font-weight: 700;
       border-radius: 6px;
       cursor: pointer;
-      margin-top: 20px;
-      width: 100%;
+      margin-top: auto; /* tlačítko v pravém sloupci dole */
       font-size: 1.1em;
       transition: background 0.3s ease;
+      width: 100%;
     }
 
     button:hover {
       background: #5e3bbb;
+    }
+
+    #orderSummary {
+      background: #f6f0fc;
+      padding: 15px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 1em;
+      color: #3a1d6f;
+      max-height: 300px;
+      overflow-y: auto;
+      margin-top: 20px;
+    }
+
+    #orderSummary h2 {
+      margin-top: 0;
+      font-weight: 700;
+      color: #563d99;
+    }
+
+    #orderSummary ul {
+      list-style: none;
+      padding-left: 0;
+      margin: 0;
+    }
+
+    #orderSummary li {
+      margin-bottom: 8px;
+      border-bottom: 1px solid #d3c9f0;
+      padding-bottom: 6px;
     }
   </style>
 </head>
@@ -92,38 +127,48 @@
   <form id="orderForm">
     <h1>Vyplň údaje k objednávce</h1>
 
-    <label for="name">Jméno:</label>
-    <input type="text" id="name" name="name" required maxlength="30" />
+    <div class="column">
+      <label for="name">Jméno:</label>
+      <input type="text" id="name" name="name" required maxlength="30" />
 
-    <label for="surname">Příjmení:</label>
-    <input type="text" id="surname" name="surname" required maxlength="30" />
+      <label for="surname">Příjmení:</label>
+      <input type="text" id="surname" name="surname" required maxlength="30" />
 
-    <label for="email">E-mail:</label>
-    <input type="email" id="email" name="email" required maxlength="50" />
+      <label for="email">E-mail:</label>
+      <input type="email" id="email" name="email" required maxlength="50" />
 
-    <label for="address">Adresa doručení:</label>
-    <textarea id="address" name="address" required maxlength="200"></textarea>
+      <label for="address">Adresa doručení:</label>
+      <textarea id="address" name="address" required maxlength="200"></textarea>
 
-    <label for="postcode">PSČ:</label>
-    <input
-      type="text"
-      id="postcode"
-      name="postcode"
-      required
-      maxlength="5"
-      pattern="\d{5}"
-      title="Zadejte PSČ ve formátu 5 číslic"
-    />
+      <label for="postcode">PSČ:</label>
+      <input
+        type="text"
+        id="postcode"
+        name="postcode"
+        required
+        maxlength="5"
+        pattern="\d{5}"
+        title="Zadejte PSČ ve formátu 5 číslic"
+      />
+    </div>
 
-    <label for="payment">Platební metoda:</label>
-    <select id="payment" name="payment" required>
-      <option value="">Vyberte</option>
-      <option value="dobirka">Dobírka</option>
-      <option value="prevod">Bankovní převod</option>
-      <option value="kartou">Platba kartou</option>
-    </select>
+    <div class="column">
+      <label for="payment">Platební metoda:</label>
+      <select id="payment" name="payment" required>
+        <option value="">Vyberte</option>
+        <option value="dobirka">Dobírka</option>
+        <option value="prevod">Bankovní převod</option>
+        <option value="kartou">Platba kartou</option>
+      </select>
 
-    <button type="submit">Potvrdit objednávku</button>
+      <div id="orderSummary">
+        <h2>Souhrn objednávky</h2>
+        <ul id="summaryList"></ul>
+        <p><strong>Celkem: <span id="totalPrice">0</span> Kč</strong></p>
+      </div>
+
+      <button type="submit">Potvrdit objednávku</button>
+    </div>
   </form>
 
   <script>
@@ -134,13 +179,27 @@
       window.location.href = "index.html";
     }
 
+    // Vypíše obsah košíku do souhrnu
+    const summaryList = document.getElementById("summaryList");
+    const totalPriceEl = document.getElementById("totalPrice");
+    let total = 0;
+
+    cart.forEach((item) => {
+      const li = document.createElement("li");
+      li.textContent = `${item.name} — ${item.weight} kg — ${item.price} Kč`;
+      summaryList.appendChild(li);
+      total += item.price;
+    });
+
+    totalPriceEl.textContent = total;
+
     document.getElementById("orderForm").onsubmit = (e) => {
       e.preventDefault();
       const formData = new FormData(e.target);
       const data = {};
       formData.forEach((v, k) => (data[k] = v));
 
-      // Pro ukázku - zpracování objednávky zde (např. odeslat na backend)
+      // Tady bys mohla přidat odesílání objednávky na backend (Firebase apod.)
       console.log("Objednávka:", data, cart);
 
       alert(

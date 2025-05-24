@@ -107,3 +107,26 @@ ul#cartList li button {
 ul#cartList li button:hover {
   background: #b53c3c;
 }
+
+.container {
+  display: flex;
+  gap: 30px;
+  align-items: flex-start; /* zarovná košík nahoře */
+}
+
+.cart {
+  width: 300px;
+  background: #f4eafd;
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(100, 70, 170, 0.2);
+  position: sticky;
+  top: 20px;
+  height: fit-content;
+}
+
+/* zmenšíme šířku tlačítek v košíku */
+ul#cartList li button {
+  padding: 3px 8px;
+  font-size: 0.85em;
+}

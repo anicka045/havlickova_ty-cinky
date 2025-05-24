@@ -25,6 +25,18 @@
       Adresa doručení:
       <textarea name="address" required></textarea>
     </label>
+
+    <label for="postcode">PSČ:</label>
+    <input
+        type="text"
+        id="postcode"
+        name="postcode"
+        required
+        maxlength="5"
+        pattern="\d{5}"
+        title="Zadejte PSČ"
+    />
+
     <label>
       Platební metoda:
       <select name="payment" required>

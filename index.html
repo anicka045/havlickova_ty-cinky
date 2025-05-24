@@ -21,7 +21,7 @@
       gap: 20px;
       justify-content: center;
       flex-wrap: wrap;
-      margin-bottom: 40px;
+      margin-bottom: 20px;
       padding-right: 300px; /* rezervace místa pro košík */
     }
     .product {
@@ -78,18 +78,18 @@
       background-color: #6a46c9;
     }
 
-    /* Ukotvený graf v pravém dolním rohu */
+    /* Graf pod produkty */
     #pieChart {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
+      margin-top: 20px;
       background: white;
       padding: 10px;
       border-radius: 10px;
       box-shadow: 0 0 10px rgba(75, 63, 114, 0.7);
-      width: 300px !important;
-      height: 300px !important;
-      z-index: 999;
+      width: 300px;
+      height: 300px;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
     }
   </style>
 </head>
@@ -101,6 +101,8 @@
     <!-- Produkty se v JS vykreslí sem -->
   </div>
 
+  <canvas id="pieChart" width="300" height="300"></canvas>
+
   <div class="cart" id="cart">
     <h2>Košík</h2>
     <ul id="cartItems"></ul>
@@ -108,16 +110,14 @@
     <button id="goToOrder">Pokračovat k objednávce</button>
   </div>
 
-  <canvas id="pieChart" width="300" height="300"></canvas>
-
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script>
     const products = [
-      { id: "cinka2", name: "Činka 2 kg", price: 350, image: "cinka2.jpg", weight: 2 },
-      { id: "cinka5", name: "Činka 5 kg", price: 750, image: "cinka5.jpg", weight: 5 },
-      { id: "cinka10", name: "Činka 10 kg", price: 1400, image: "cinka10.jpg", weight: 10 },
-      { id: "cinka15", name: "Činka 15 kg", price: 2000, image: "cinka15.jpg", weight: 15 },
-      { id: "cinka20", name: "Činka 20 kg", price: 2500, image: "cinka20.jpg", weight: 20 }
+      { id: "cinka2", name: "Činka 2 kg", price: 249, image: "cinka2.jpg", weight: 2 },
+      { id: "cinka5", name: "Činka 5 kg", price: 399, image: "cinka5.jpg", weight: 5 },
+      { id: "cinka10", name: "Činka 10 kg", price: 749, image: "cinka10.jpg", weight: 10 },
+      { id: "cinka15", name: "Činka 15 kg", price: 1099, image: "cinka15.jpg", weight: 15 },
+      { id: "cinka20", name: "Činka 20 kg", price: 1299, image: "cinka20.jpg", weight: 20 }
     ];
 
     const productsContainer = document.getElementById("products");
@@ -208,11 +208,11 @@
           datasets: [{
             data: data,
             backgroundColor: [
-              'rgba(138, 43, 226, 0.7)',  // BlueViolet
-              'rgba(147, 112, 219, 0.7)', // MediumPurple
-              'rgba(123, 104, 238, 0.7)', // MediumSlateBlue
-              'rgba(106, 90, 205, 0.7)',  // SlateBlue
-              'rgba(72, 61, 139, 0.7)',   // DarkSlateBlue
+                'rgba(255, 99, 132, 0.7)',   // červená
+                'rgba(54, 162, 235, 0.7)',   // modrá
+                'rgba(75, 192, 192, 0.7)',   // zelená
+                'rgba(255, 206, 86, 0.7)',   // žlutá
+                'rgba(255, 159, 64, 0.7)'    // oranžová
             ],
             borderColor: '#fff',
             borderWidth: 2,

@@ -118,6 +118,9 @@
       { id: "cinka10", name: "Činka 10 kg", price: 749, image: "cinka10.jpg", weight: 10 },
       { id: "cinka15", name: "Činka 15 kg", price: 1099, image: "cinka15.jpg", weight: 15 },
       { id: "cinka20", name: "Činka 20 kg", price: 1299, image: "cinka20.jpg", weight: 20 }
+      { id: "cinka30", name: "Činka 30 kg", price: 1399, image: "cinka30.jpg", weight: 30 },
+      { id: "cinka40", name: "Činka 40 kg", price: 1799, image: "cinka40.jpg", weight: 40 },
+      { id: "cinka50", name: "Činka 50 kg", price: 2199, image: "cinka50.jpg", weight: 50 }
     ];
 
     const productsContainer = document.getElementById("products");
@@ -208,12 +211,15 @@
           datasets: [{
             data: data,
             backgroundColor: [
-                'rgba(255, 99, 132, 0.7)',   // červená
-                'rgba(54, 162, 235, 0.7)',   // modrá
-                'rgba(75, 192, 192, 0.7)',   // zelená
-                'rgba(255, 206, 86, 0.7)',   // žlutá
-                'rgba(255, 159, 64, 0.7)'    // oranžová
-            ],
+            'rgba(255, 99, 132, 0.7)',   // červená
+            'rgba(54, 162, 235, 0.7)',   // modrá
+            'rgba(75, 192, 192, 0.7)',   // zelená
+            'rgba(255, 206, 86, 0.7)',   // žlutá
+            'rgba(255, 159, 64, 0.7)',   // oranžová
+            'rgba(153, 102, 255, 0.7)',  // fialová
+            'rgba(255, 99, 255, 0.7)',   // růžová
+            'rgba(99, 255, 132, 0.7)'    // světle zelená
+        ],
             borderColor: '#fff',
             borderWidth: 2,
           }]

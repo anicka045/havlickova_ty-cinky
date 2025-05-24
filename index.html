@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Havlíčková činky - Hlavní stránka</title>
+  <title>Havlíčkova činky - Hlavní stránka</title>
   <style>
     body {
       background-color: #e6dff7; /* světle fialové pozadí */
@@ -22,6 +22,7 @@
       justify-content: center;
       flex-wrap: wrap;
       margin-bottom: 40px;
+      padding-right: 300px; /* rezervace místa pro košík */
     }
     .product {
       background: white;
@@ -35,6 +36,8 @@
       max-width: 100%;
       border-radius: 5px;
     }
+
+    /* Ukotvený košík vpravo nahoře */
     .cart {
       position: fixed;
       top: 20px;
@@ -42,14 +45,24 @@
       background: white;
       padding: 15px;
       border-radius: 8px;
-      box-shadow: 0 0 8px rgba(75, 63, 114, 0.5);
-      width: 250px;
+      box-shadow: 0 0 8px rgba(75, 63, 114, 0.7);
+      width: 260px;
       max-height: 400px;
       overflow-y: auto;
+      z-index: 1000;
     }
     .cart h2 {
       margin-top: 0;
       color: #7a56d9;
+    }
+    .cart ul {
+      padding-left: 0;
+      list-style: none;
+      margin: 0;
+    }
+    .cart li {
+      margin-bottom: 10px;
+      font-weight: 600;
     }
     button {
       background-color: #7a56d9;
@@ -64,11 +77,19 @@
     button:hover {
       background-color: #6a46c9;
     }
-    /* Styl pro graf */
+
+    /* Ukotvený graf v pravém dolním rohu */
     #pieChart {
-      max-width: 500px;
-      margin: 0 auto 50px auto;
-      display: block;
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: white;
+      padding: 10px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(75, 63, 114, 0.7);
+      width: 300px !important;
+      height: 300px !important;
+      z-index: 999;
     }
   </style>
 </head>
@@ -87,18 +108,16 @@
     <button id="goToOrder">Pokračovat k objednávce</button>
   </div>
 
-  <h2 style="text-align:center; color:#4b3f72;">Rozdělení objednaných činek</h2>
-  <canvas id="pieChart" width="400" height="400"></canvas>
+  <canvas id="pieChart" width="300" height="300"></canvas>
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script>
-    // Produkty - s váhami a obrázky
     const products = [
-      { id: "cinka2", name: "Činka 2 kg", price: 350, image: "images/cinka2.jpg", weight: 2 },
-      { id: "cinka5", name: "Činka 5 kg", price: 750, image: "images/cinka5.jpg", weight: 5 },
-      { id: "cinka10", name: "Činka 10 kg", price: 1400, image: "images/cinka10.jpg", weight: 10 },
-      { id: "cinka15", name: "Činka 15 kg", price: 2000, image: "images/cinka15.jpg", weight: 15 },
-      { id: "cinka20", name: "Činka 20 kg", price: 2500, image: "images/cinka20.jpg", weight: 20 }
+      { id: "cinka2", name: "Činka 2 kg", price: 350, image: "cinka2.jpg", weight: 2 },
+      { id: "cinka5", name: "Činka 5 kg", price: 750, image: "cinka5.jpg", weight: 5 },
+      { id: "cinka10", name: "Činka 10 kg", price: 1400, image: "cinka10.jpg", weight: 10 },
+      { id: "cinka15", name: "Činka 15 kg", price: 2000, image: "cinka15.jpg", weight: 15 },
+      { id: "cinka20", name: "Činka 20 kg", price: 2500, image: "cinka20.jpg", weight: 20 }
     ];
 
     const productsContainer = document.getElementById("products");
@@ -106,10 +125,8 @@
     const totalPriceEl = document.getElementById("totalPrice");
     const goToOrderBtn = document.getElementById("goToOrder");
 
-    // Načti košík z sessionStorage
     let cart = JSON.parse(sessionStorage.getItem("cart") || "[]");
 
-    // Vykreslení produktů
     function renderProducts() {
       productsContainer.innerHTML = "";
       products.forEach(product => {
@@ -125,14 +142,12 @@
       });
     }
 
-    // Aktualizace košíku na stránce
     function renderCart() {
       cartItemsContainer.innerHTML = "";
       let total = 0;
       cart.forEach((item, index) => {
         const li = document.createElement("li");
         li.textContent = `${item.name} — ${item.weight} kg — ${item.price} Kč`;
-        // Přidáme tlačítko odebrat
         const removeBtn = document.createElement("button");
         removeBtn.textContent = "Odebrat";
         removeBtn.style.marginLeft = "10px";
@@ -149,7 +164,6 @@
       totalPriceEl.textContent = total;
     }
 
-    // Přidání produktu do košíku
     productsContainer.addEventListener("click", e => {
       if (e.target.tagName === "BUTTON") {
         const id = e.target.dataset.id;
@@ -163,16 +177,14 @@
       }
     });
 
-    // Tlačítko pokračovat (např. přesměrování na order.html)
     goToOrderBtn.addEventListener("click", () => {
       window.location.href = "order.html";
     });
 
-    // Renderujeme produkty a košík při načtení
     renderProducts();
     renderCart();
 
-    // --- Graf ---
+    // Graf Chart.js
     const ctx = document.getElementById('pieChart').getContext('2d');
     let pieChart;
 
@@ -185,7 +197,6 @@
       const labels = Object.keys(counts);
       const data = Object.values(counts);
 
-      // Pokud už graf existuje, smažeme ho (aby nedošlo k překreslení přes sebe)
       if (pieChart) {
         pieChart.destroy();
       }
@@ -197,11 +208,11 @@
           datasets: [{
             data: data,
             backgroundColor: [
-              'rgba(122, 86, 217, 0.7)',
-              'rgba(177, 141, 230, 0.7)',
-              'rgba(98, 63, 174, 0.7)',
-              'rgba(154, 108, 224, 0.7)',
-              'rgba(102, 58, 190, 0.7)',
+              'rgba(138, 43, 226, 0.7)',  // BlueViolet
+              'rgba(147, 112, 219, 0.7)', // MediumPurple
+              'rgba(123, 104, 238, 0.7)', // MediumSlateBlue
+              'rgba(106, 90, 205, 0.7)',  // SlateBlue
+              'rgba(72, 61, 139, 0.7)',   // DarkSlateBlue
             ],
             borderColor: '#fff',
             borderWidth: 2,
@@ -212,6 +223,13 @@
           plugins: {
             legend: {
               position: 'right',
+              labels: {
+                color: '#4b3f72',
+                font: {
+                  size: 14,
+                  weight: 'bold'
+                }
+              }
             },
             tooltip: {
               enabled: true

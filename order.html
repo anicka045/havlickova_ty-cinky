@@ -195,11 +195,15 @@
   let total = 0;
 
   cart.forEach((item) => {
-    const li = document.createElement("li");
-    li.textContent = `${item.name} — ${item.weight} kg — ${item.price} Kč`;
-    summaryList.appendChild(li);
-    total += item.price;
-  });
+  // Pokud nemáš 'weight', můžeš místo toho použít třeba 'kg' nebo 'vaha'
+  // Předpokládám, že položky mají vlastnost weight (číslo)
+  const weight = item.weight !== undefined ? item.weight : "—";
+  const li = document.createElement("li");
+  li.textContent = `${item.name} — ${weight} kg — ${item.price} Kč`;
+  summaryList.appendChild(li);
+  total += item.price;
+});
+
 
   totalPriceEl.textContent = total;
 

@@ -8,11 +8,26 @@
       background: #e8dff7;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       color: #4b2c83;
-      margin: 20px;
+      margin: 0;
       min-height: 100vh;
       display: flex;
       justify-content: center;
       align-items: flex-start;
+      padding: 20px;
+    }
+
+    header {
+      background: white;
+      width: 900px;
+      padding: 15px 0;
+      margin-bottom: 20px;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(75, 44, 131, 0.15);
+      text-align: center;
+      color: #3a1d6f;
+      font-weight: 700;
+      font-size: 2em;
+      user-select: none;
     }
 
     form {
@@ -31,19 +46,14 @@
       flex: 1;
       display: flex;
       flex-direction: column;
-    }
-
-    h1 {
-      text-align: center;
-      color: #3a1d6f;
-      margin-bottom: 30px;
-      width: 100%;
+      align-items: flex-start; /* zarovnání doleva */
     }
 
     label {
       margin: 10px 0 6px;
       font-weight: 600;
       color: #563d99;
+      align-self: flex-start; /* zaručí levé zarovnání i u label */
     }
 
     input[type="text"],
@@ -82,7 +92,7 @@
       font-weight: 700;
       border-radius: 6px;
       cursor: pointer;
-      margin-top: auto; /* tlačítko v pravém sloupci dole */
+      margin-top: auto; /* tlačítko dole v pravém sloupci */
       font-size: 1.1em;
       transition: background 0.3s ease;
       width: 100%;
@@ -102,18 +112,21 @@
       max-height: 300px;
       overflow-y: auto;
       margin-top: 20px;
+      width: 100%;
     }
 
     #orderSummary h2 {
       margin-top: 0;
       font-weight: 700;
       color: #563d99;
+      text-align: left;
     }
 
     #orderSummary ul {
       list-style: none;
       padding-left: 0;
       margin: 0;
+      width: 100%;
     }
 
     #orderSummary li {
@@ -124,9 +137,9 @@
   </style>
 </head>
 <body>
-  <form id="orderForm">
-    <h1>Vyplň údaje k objednávce</h1>
+  <header>Vyplň údaje k objednávce</header>
 
+  <form id="orderForm">
     <div class="column">
       <label for="name">Jméno:</label>
       <input type="text" id="name" name="name" required maxlength="30" />
@@ -148,7 +161,7 @@
         required
         maxlength="5"
         pattern="\d{5}"
-        title="Zadejte PSČ ve formátu 5 číslic"
+        title="Zadejte PSČ"
       />
     </div>
 
@@ -179,7 +192,6 @@
       window.location.href = "index.html";
     }
 
-    // Vypíše obsah košíku do souhrnu
     const summaryList = document.getElementById("summaryList");
     const totalPriceEl = document.getElementById("totalPrice");
     let total = 0;
@@ -199,7 +211,7 @@
       const data = {};
       formData.forEach((v, k) => (data[k] = v));
 
-      // Tady bys mohla přidat odesílání objednávky na backend (Firebase apod.)
+      // Zde můžeš přidat kód na odeslání objednávky do backendu (Firebase apod.)
       console.log("Objednávka:", data, cart);
 
       alert(

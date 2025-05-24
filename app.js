@@ -1,6 +1,8 @@
 let cart = [];
 
 const products = [
+  { name: 'Činka 2,5 kg', price: 250},
+  { name: 'Činka 5 kg', price: 500},
   { name: 'Činka 10 kg', price: 700 },
   { name: 'Činka 15 kg', price: 1050 },
   { name: 'Činka 20 kg', price: 1400 },
@@ -43,6 +45,9 @@ function updateCart() {
     `;
     cartDiv.appendChild(item);
   });
+
+  // ➕ Tady ukládáme košík do localStorage
+  localStorage.setItem('cart', JSON.stringify(cart));
 }
 
 function checkout() {

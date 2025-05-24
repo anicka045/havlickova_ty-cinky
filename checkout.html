@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <title>Vyplnění údajů</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    input, select { display: block; margin-bottom: 15px; width: 300px; padding: 8px; }
+    button { padding: 10px 20px; background: #007bff; color: white; border: none; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <h1>Vyplňte údaje pro doručení</h1>
+
+  <input id="firstName" placeholder="Jméno" />
+  <input id="lastName" placeholder="Příjmení" />
+  <input id="email" placeholder="E-mail" />
+  <input id="address" placeholder="Adresa doručení" />
+
+  <label for="payment">Zvolte platební metodu:</label>
+  <select id="payment">
+    <option value="paypal">PayPal</option>
+    <option value="card">Online platební brána</option>
+    <option value="bank">Bankovní převod</option>
+  </select>
+
+  <button onclick="submitFinalOrder()">Potvrdit objednávku</button>
+
+  <script>
+    function submitFinalOrder() {
+      const name = document.getElementById('firstName').value;
+      const surname = document.getElementById('lastName').value;
+      const email = document.getElementById('email').value;
+      const address = document.getElementById('address').value;
+      const payment = document.getElementById('payment').value;
+      const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+
+      if (!name || !surname || !email || !address) {
+        alert("Vyplňte prosím všechna pole.");
+        return;
+      }
+
+      const order = {
+        name,
+        surname,
+        email,
+        address,
+        payment,
+        cart,
+        createdAt: new Date().toISOString()
+      };
+
+      fetch('https://havlickova-ty-cinky-default-rtdb.europe-west1.firebasedatabase.app/orders.json', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(order)
+      })
+      .then(res => {
+        if (res.ok) {
+          alert(`Souhrn objednávky byl zaslán na e-mail: ${email}.\nUhraďte prosím objednávku podle pokynů v e-mailu.`);
+          localStorage.removeItem('cart');
+          window.location.href = 'index.html'; // přesměrování zpět
+        } else {
+          alert("Chyba při odesílání objednávky.");
+        }
+      });
+    }
+  </script>
+</body>
+</html>

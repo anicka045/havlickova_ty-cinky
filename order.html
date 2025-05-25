@@ -198,61 +198,48 @@
   let total = 0;
 
   cart.forEach((item) => {
-  // Pokud nemáš 'weight', můžeš místo toho použít třeba 'kg' nebo 'vaha'
-  // Předpokládám, že položky mají vlastnost weight (číslo)
-  const weight = item.weight !== undefined ? item.weight : "—";
-  const li = document.createElement("li");
-  li.textContent = `${item.name} — ${weight} kg — ${item.price} Kč`;
-  summaryList.appendChild(li);
-  total += item.price;
-});
-
+    const weight = item.weight !== undefined ? item.weight : "—";
+    const li = document.createElement("li");
+    li.textContent = `${item.name} — ${weight} kg — ${item.price} Kč (×${item.qty})`;
+    summaryList.appendChild(li);
+    total += item.price * (item.qty || 1);
+  });
 
   totalPriceEl.textContent = total;
 
   document.getElementById("orderForm").onsubmit = (e) => {
-  e.preventDefault();
+    e.preventDefault();
 
-  const formData = new FormData(e.target);
-  const data = {};
-  formData.forEach((v, k) => (data[k] = v));
+    const formData = new FormData(e.target);
+    const data = {};
+    formData.forEach((v, k) => (data[k] = v));
 
-  const cart = JSON.parse(sessionStorage.getItem("cart") || "[]");
+    const order = {
+      ...data,
+      cart,
+      totalPrice: total,
+      createdAt: new Date().toISOString()
+    };
 
-  const order = {
-    name: data.name,
-    surname: data.surname,
-    email: data.email,
-    address: data.address,
-    postcode: data.postcode,
-    payment: data.payment,
-    cart,
-    createdAt: new Date().toISOString()
+    fetch("https://havlickova-ty-cinky-default-rtdb.europe-west1.firebasedatabase.app/orders.json", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(order)
+    })
+    .then(res => {
+      if (!res.ok) throw new Error("Firebase vrátila chybu.");
+      alert("Souhrn objednávky a údaje k platbě byly odeslány na váš e-mail.\n\nDěkujeme za nákup!");
+      sessionStorage.removeItem("cart");
+      window.location.href = "index.html";
+    })
+    .catch(err => {
+      alert("Nepodařilo se uložit objednávku: " + err.message);
+    });
   };
-
-  fetch("https://havlickova-ty-cinky-default-rtdb.europe-west1.firebasedatabase.app/orders.json", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify(order)
-  })
-  .then(res => {
-    if (!res.ok) throw new Error("Chyba při odesílání do Firebase");
-
-    alert(
-      "Souhrn objednávky a údaje k platbě byly odeslány na váš e-mail.\n\nDěkujeme za nákup!"
-    );
-
-    sessionStorage.removeItem("cart");
-    window.location.href = "index.html";
-  })
-  .catch(err => {
-    alert("Nepodařilo se uložit objednávku do Firebase: " + err.message);
-  });
-};
-
 </script>
+
 
 </body>
 </html>

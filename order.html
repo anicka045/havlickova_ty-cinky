@@ -5,10 +5,12 @@
   <title>Objednávka</title>
   <style>
     html, body {
-      margin: 0; padding: 0; height: 100%;
-      background: #e8dff7;
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background: #f4f7fb;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      color: #4b2c83;
+      color: #1a237e;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -16,20 +18,16 @@
     }
 
     header {
-      position: sticky;
-      top: 0;
-      z-index: 1000;
       background: white;
       width: 900px;
       padding: 20px 0;
       margin-bottom: 20px;
       border-radius: 12px;
-      box-shadow: 0 3px 8px rgba(75, 44, 131, 0.15);
+      box-shadow: 0 3px 8px rgba(63, 81, 181, 0.1);
       text-align: center;
-      color: #3a1d6f;
+      color: #3f51b5;
       font-weight: 700;
       font-size: 2.2em;
-      user-select: none;
     }
 
     form {
@@ -37,24 +35,21 @@
       width: 900px;
       padding: 30px 40px;
       border-radius: 12px;
-      box-shadow: 0 0 15px rgba(75, 44, 131, 0.25);
+      box-shadow: 0 0 15px rgba(63, 81, 181, 0.15);
       display: flex;
       gap: 40px;
-      box-sizing: border-box;
     }
 
     .column {
       flex: 1;
       display: flex;
       flex-direction: column;
-      align-items: flex-start;
     }
 
     label {
       margin: 10px 0 6px;
       font-weight: 600;
-      color: #563d99;
-      align-self: flex-start;
+      color: #303f9f;
     }
 
     input[type="text"],
@@ -64,12 +59,11 @@
       width: 100%;
       padding: 8px 12px;
       border-radius: 6px;
-      border: 1px solid #a59ad1;
+      border: 1px solid #c5cae9;
       font-size: 1em;
-      color: #4b2c83;
-      font-weight: 600;
-      box-sizing: border-box;
-      resize: vertical;
+      color: #1a237e;
+      font-weight: 500;
+      background: #fefefe;
     }
 
     input[type="text"][name="name"],
@@ -86,7 +80,7 @@
     }
 
     button {
-      background: #7a56d9;
+      background: #3f51b5;
       border: none;
       padding: 14px 0;
       color: white;
@@ -100,16 +94,16 @@
     }
 
     button:hover {
-      background: #5e3bbb;
+      background: #303f9f;
     }
 
     #orderSummary {
-      background: #f6f0fc;
+      background: #e8eaf6;
       padding: 20px;
       border-radius: 8px;
       font-weight: 600;
       font-size: 1em;
-      color: #3a1d6f;
+      color: #1a237e;
       max-height: 300px;
       overflow-y: auto;
       width: 100%;
@@ -118,20 +112,18 @@
     #orderSummary h2 {
       margin-top: 0;
       font-weight: 700;
-      color: #563d99;
-      text-align: left;
+      color: #3f51b5;
     }
 
     #orderSummary ul {
       list-style: none;
       padding-left: 0;
       margin: 0;
-      width: 100%;
     }
 
     #orderSummary li {
       margin-bottom: 8px;
-      border-bottom: 1px solid #d3c9f0;
+      border-bottom: 1px solid #c5cae9;
       padding-bottom: 6px;
     }
   </style>

@@ -1,170 +1,222 @@
+/* --- Základní nastavení těla --- */
 body {
-  background: #dbe9f4;  /* změněné pozadí */
+  background: linear-gradient(135deg, #dbe9f4 0%, #f0f4ff 100%);
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: #2f3640;
   margin: 0;
-  padding-top: 80px;
+  padding-top: 80px; /* prostor pro fixní header */
+  min-height: 100vh;
 }
 
-
-h1 {
-  color: #2d3a4f;
-  text-align: center;
+/* --- Fixní hlavička nahoře --- */
+header {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  background: #ffffff;
-  padding: 20px 0;
-  margin: 0;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  top: 0; left: 0; right: 0;
+  height: 60px;
+  background: linear-gradient(90deg, #7a56d9, #5e3bbb);
+  color: white;
+  font-weight: 700;
+  font-size: 1.8em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   z-index: 1000;
+  box-shadow: 0 2px 8px rgba(90, 58, 175, 0.6);
+  letter-spacing: 1.2px;
+  user-select: none;
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
 }
 
-h2 {
-  color: #2d3a4f;
-  margin-top: 30px;
-}
-
+/* --- Kontejner s činkami a košíkem --- */
 .container {
   display: flex;
+  max-width: 1200px;
+  margin: 20px auto 0 auto;
   gap: 30px;
-  align-items: flex-start;
-  padding: 0 40px;
-  margin-top: 20px;
 }
 
-/* Levá část – produkty */
-.products-grid {
-  display: flex;
-  gap: 15px;
-  flex-wrap: wrap;
-  margin-bottom: 40px;
-  flex: 1;
+/* --- Levá sekce - Produkty --- */
+.products {
+  flex: 2;
+  background: white;
+  padding: 25px 30px;
+  border-radius: 16px;
+  box-shadow: 0 6px 18px rgba(122, 86, 217, 0.25);
+  min-height: 400px;
+  transition: box-shadow 0.3s ease;
 }
 
-/* Pravá část – košík */
+.products:hover {
+  box-shadow: 0 8px 24px rgba(122, 86, 217, 0.4);
+}
+
+/* --- Pravá sekce - Košík --- */
 .cart {
-  width: 280px;
-  background: #e7ecf2;
-  padding: 15px;
-  border-radius: 12px;
-  box-shadow: 0 0 10px rgba(50, 60, 80, 0.1);
+  flex: 1;
+  background: #f8f5ff;
+  padding: 25px 20px;
+  border-radius: 16px;
+  box-shadow: 0 6px 18px rgba(94, 59, 187, 0.2);
   position: sticky;
-  top: 100px;
+  top: 80px; /* pod hlavičku */
   height: fit-content;
+  color: #4b2c83;
+  font-weight: 600;
 }
 
-/* Produkty */
-.product {
-  background: #ffffff;
-  border-radius: 10px;
-  padding: 10px;
-  width: 180px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+/* --- Sekce s grafem pod činkami --- */
+.chart-section {
+  max-width: 1200px;
+  margin: 30px auto 50px auto;
+  background: white;
+  padding: 25px 30px;
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(94, 59, 187, 0.25);
+  font-weight: 600;
+  color: #563d99;
+  letter-spacing: 0.02em;
+  user-select: none;
+}
+
+/* --- Nadpisy h1, h2 --- */
+h1, h2 {
+  color: #5e3bbb;
+  text-shadow: 0 1px 2px rgba(122, 86, 217, 0.4);
+}
+
+h1 {
   text-align: center;
-  transition: transform 0.2s ease;
+  margin-bottom: 30px;
+}
+
+/* --- Produkty --- */
+.product {
+  background: #fff;
+  border-radius: 12px;
+  padding: 15px 12px;
+  margin-bottom: 20px;
+  box-shadow: 0 3px 8px rgba(122, 86, 217, 0.15);
+  text-align: center;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  cursor: pointer;
 }
 
 .product:hover {
-  transform: scale(1.05);
+  transform: scale(1.07);
+  box-shadow: 0 8px 20px rgba(122, 86, 217, 0.35);
 }
 
 .product img {
   max-width: 100%;
   height: 120px;
   object-fit: contain;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
+  filter: drop-shadow(0 0 4px rgba(94, 59, 187, 0.15));
 }
 
 .product-name {
   font-weight: 700;
-  margin-bottom: 5px;
-  color: #2d3a4f;
+  margin-bottom: 6px;
+  color: #7a56d9;
 }
 
 .product-price {
-  color: #4b93d3;
-  margin-bottom: 10px;
-  font-weight: 600;
+  color: #9747ff;
+  margin-bottom: 12px;
+  font-weight: 700;
+  font-size: 1.1em;
 }
 
+/* --- Tlačítka --- */
 button {
-  background: #4b93d3;
+  background: linear-gradient(90deg, #7a56d9, #5e3bbb);
   border: none;
-  padding: 8px 12px;
+  padding: 10px 18px;
   color: white;
-  font-weight: 600;
-  border-radius: 5px;
+  font-weight: 700;
+  border-radius: 8px;
   cursor: pointer;
-  transition: background 0.3s ease;
+  font-size: 1em;
+  transition: background 0.35s ease, box-shadow 0.3s ease;
+  box-shadow: 0 3px 6px rgba(122, 86, 217, 0.6);
 }
 
 button:hover {
-  background: #367ab7;
+  background: linear-gradient(90deg, #5e3bbb, #7a56d9);
+  box-shadow: 0 5px 15px rgba(94, 59, 187, 0.8);
 }
 
+/* --- Formulářové prvky --- */
 label {
   display: block;
   margin: 12px 0 6px;
-  font-weight: 600;
-  color: #2d3a4f;
+  font-weight: 700;
+  color: #563d99;
+  user-select: none;
 }
 
 input, select, textarea {
   width: 100%;
-  padding: 6px 8px;
-  border-radius: 5px;
-  border: 1px solid #c2c9d6;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 2px solid #a59ad1;
   box-sizing: border-box;
   font-size: 1em;
+  font-weight: 600;
+  color: #4b2c83;
+  transition: border-color 0.3s ease;
+  background: #fafaff;
+  box-shadow: inset 0 0 4px rgba(122, 86, 217, 0.1);
+}
+
+input:focus, select:focus, textarea:focus {
+  border-color: #7a56d9;
+  outline: none;
+  background: #fff;
+  box-shadow: 0 0 8px rgba(122, 86, 217, 0.4);
 }
 
 textarea {
   resize: vertical;
-  min-height: 60px;
+  min-height: 70px;
 }
 
+/* --- Seznamy --- */
 ul {
   list-style: none;
   padding-left: 0;
 }
 
 ul#cartList li {
-  margin-bottom: 8px;
-  font-weight: 600;
+  margin-bottom: 10px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 ul#cartList li button {
   margin-left: 10px;
   background: #d9534f;
-  padding: 3px 8px;
+  padding: 4px 10px;
   font-size: 0.85em;
+  border-radius: 6px;
+  transition: background 0.3s ease;
 }
 
 ul#cartList li button:hover {
   background: #b53c3c;
 }
 
-/* Sekce grafu pod produkty */
-.chart-section {
-  padding: 0 40px;
-  max-width: 1000px;
-  margin: 0 auto 60px;
-}
-
-.chart-section h2 {
-  margin-bottom: 20px;
-  text-align: center;
-}
-
+/* --- Další detaily --- */
 #orderSummary {
   max-width: 500px;
   margin: 20px auto;
   padding: 20px;
   background: white;
-  border-radius: 10px;
-  box-shadow: 0 0 12px rgba(0,0,0,0.05);
+  border-radius: 14px;
+  box-shadow: 0 8px 22px rgba(94, 59, 187, 0.3);
   font-size: 1.05em;
-  color: #2f3640;
+  color: #4b2c83;
+  user-select: none;
 }

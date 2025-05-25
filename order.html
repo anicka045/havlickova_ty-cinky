@@ -185,7 +185,9 @@
   </div>
 </form>
 
-<script>
+<script type="module">
+  import { db, ref, push } from './firebase.js';  // uprav cestu podle umístění
+
   const cart = JSON.parse(sessionStorage.getItem("cart") || "[]");
 
   if (!cart.length) {
@@ -207,7 +209,7 @@
 
   totalPriceEl.textContent = total;
 
-  document.getElementById("orderForm").onsubmit = (e) => {
+  document.getElementById("orderForm").onsubmit = async (e) => {
     e.preventDefault();
 
     const formData = new FormData(e.target);
@@ -221,22 +223,14 @@
       createdAt: new Date().toISOString()
     };
 
-    fetch("https://havlickova-ty-cinky-default-rtdb.europe-west1.firebasedatabase.app/orders.json", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(order)
-    })
-    .then(res => {
-      if (!res.ok) throw new Error("Firebase vrátila chybu.");
+    try {
+      await push(ref(db, 'orders'), order);
       alert("Souhrn objednávky a údaje k platbě byly odeslány na váš e-mail.\n\nDěkujeme za nákup!");
       sessionStorage.removeItem("cart");
       window.location.href = "index.html";
-    })
-    .catch(err => {
-      alert("Nepodařilo se uložit objednávku: " + err.message);
-    });
+    } catch (error) {
+      alert("Nepodařilo se uložit objednávku: " + error.message);
+    }
   };
 </script>
 

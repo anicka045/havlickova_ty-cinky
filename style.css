@@ -148,12 +148,3 @@ ul#cartList li button:hover {
   font-size: 1.05em;
   color: #222;
 }
-
-.header-wrapper {
-  display: flex;              /* zapne flexbox */
-  justify-content: center;    /* horizontálně na střed */
-  align-items: center;        /* vertikálně na střed */
-  height: 150px;              /* výška bloku, uprav podle potřeby */
-  width: 100%;                /* šířka na celou obrazovku */
-  background: #f8f0e3;        /* můžeš dát třeba jemné pozadí */
-}

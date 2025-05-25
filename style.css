@@ -11,7 +11,22 @@ h1, h2 {
 
 h1 {
   text-align: center;
+  font-size: 2.8em;
+  margin-top: 60px;
+  color: #3a1d6f;
+  text-shadow: 1px 1px 4px rgba(100, 70, 160, 0.3);
+  background: linear-gradient(90deg, #d1b3ff, #b3d1ff);
+  padding: 15px 30px;
+  border-radius: 12px;
+  display: inline-block;
+  box-shadow: 0 4px 12px rgba(100, 70, 160, 0.1);
 }
+
+h1 i {
+  margin-right: 15px;
+  color: #6a43aa;
+}
+
 
 .products-grid {
   display: flex;

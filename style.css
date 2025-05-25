@@ -1,12 +1,12 @@
 body {
-  background: #e8dff7;
+  background: #f6d790;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  color: #4b2c83;
+  color: #d2fd8d;
   margin: 20px;
 }
 
 h1, h2 {
-  color: #3a1d6f;
+  color: #6f1d6f;
 }
 
 h1 {
@@ -25,7 +25,7 @@ h1 {
   border-radius: 10px;
   padding: 10px;
   width: 180px;
-  box-shadow: 0 0 5px rgba(75, 44, 131, 0.3);
+  box-shadow: 0 0 5px rgba(244, 148, 4, 0.3);
   text-align: center;
   transition: transform 0.2s ease;
 }

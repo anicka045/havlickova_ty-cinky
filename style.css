@@ -148,3 +148,9 @@ ul#cartList li button:hover {
   font-size: 1.05em;
   color: #222;
 }
+.hero {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

@@ -318,8 +318,27 @@
 </script>
 <script>
   document.getElementById("proceed").addEventListener("click", function () {
-    window.location.href = "order.html";
+  if (Object.keys(cart).length === 0) {
+    alert('Košík je prázdný, nejprve přidejte produkty.');
+    return;
+  }
+
+  // Převeď objekt `cart` na pole, aby bylo čitelné v order.html
+  const cartArray = Object.keys(cart).map(id => {
+    const product = products.find(p => p.id === id);
+    return {
+      id,
+      name: product.name,
+      price: product.price,
+      weight: product.weight,
+      qty: cart[id].qty
+    };
   });
+
+  sessionStorage.setItem("cart", JSON.stringify(cartArray));
+  window.location.href = "order.html";
+});
+
 </script>
 </body>
 </html>

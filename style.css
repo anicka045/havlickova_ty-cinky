@@ -1,10 +1,11 @@
 body {
-  background: #f0f2f5;
+  background: #dbe9f4;  /* změněné pozadí */
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: #2f3640;
   margin: 0;
   padding-top: 80px;
 }
+
 
 h1 {
   color: #2d3a4f;

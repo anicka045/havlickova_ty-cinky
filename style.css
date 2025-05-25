@@ -1,25 +1,60 @@
 body {
-  background: #f2f4f7;
+  background: #f0f2f5;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: #2f3640;
-  margin: 20px;
-}
-
-h1, h2 {
-  color: #2d3a4f;
+  margin: 0;
+  padding-top: 80px;
 }
 
 h1 {
+  color: #2d3a4f;
   text-align: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: #ffffff;
+  padding: 20px 0;
+  margin: 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  z-index: 1000;
 }
 
+h2 {
+  color: #2d3a4f;
+  margin-top: 30px;
+}
+
+.container {
+  display: flex;
+  gap: 30px;
+  align-items: flex-start;
+  padding: 0 40px;
+  margin-top: 20px;
+}
+
+/* Levá část – produkty */
 .products-grid {
   display: flex;
   gap: 15px;
   flex-wrap: wrap;
-  margin-bottom: 20px;
+  margin-bottom: 40px;
+  flex: 1;
 }
 
+/* Pravá část – košík */
+.cart {
+  width: 280px;
+  background: #e7ecf2;
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(50, 60, 80, 0.1);
+  position: sticky;
+  top: 100px;
+  height: fit-content;
+}
+
+/* Produkty */
 .product {
   background: #ffffff;
   border-radius: 10px;
@@ -102,32 +137,24 @@ ul#cartList li {
 ul#cartList li button {
   margin-left: 10px;
   background: #d9534f;
+  padding: 3px 8px;
+  font-size: 0.85em;
 }
 
 ul#cartList li button:hover {
   background: #b53c3c;
 }
 
-.container {
-  display: flex;
-  gap: 30px;
-  align-items: flex-start;
+/* Sekce grafu pod produkty */
+.chart-section {
+  padding: 0 40px;
+  max-width: 1000px;
+  margin: 0 auto 60px;
 }
 
-.cart {
-  width: 300px;
-  background: #e7ecf2;
-  padding: 15px;
-  border-radius: 12px;
-  box-shadow: 0 0 10px rgba(50, 60, 80, 0.1);
-  position: sticky;
-  top: 20px;
-  height: fit-content;
-}
-
-ul#cartList li button {
-  padding: 3px 8px;
-  font-size: 0.85em;
+.chart-section h2 {
+  margin-bottom: 20px;
+  text-align: center;
 }
 
 #orderSummary {

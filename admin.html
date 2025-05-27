@@ -4,6 +4,13 @@
   <meta charset="UTF-8">
   <title>Admin – Přehled objednávek</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+  if (sessionStorage.getItem("admin") !== "true") {
+    alert("Přístup odepřen. Nejste přihlášen jako administrátor.");
+    window.location.href = "login.html";
+  }
+</script>
+
 </head>
 <body>
   <h1>Počet objednávek podle dne</h1>
@@ -45,6 +52,17 @@
         }
       }
     });
+
+
+    <button onclick="logout()">Odhlásit se</button>
+
+    
+      function logout() {
+        sessionStorage.removeItem("admin");
+        window.location.href = "login.html";
+      }
+
+
   </script>
 </body>
 </html>

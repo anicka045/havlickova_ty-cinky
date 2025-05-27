@@ -3,18 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <title>Admin – Přehled objednávek</title>
+  <link rel="stylesheet" href="styles.css">
+
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script>
-  if (sessionStorage.getItem("admin") !== "true") {
-    alert("Přístup odepřen. Nejste přihlášen jako administrátor.");
-    window.location.href = "login.html";
-  }
-</script>
-
+    if (sessionStorage.getItem("isAdmin") !== "true") {
+      alert("Přístup odepřen. Nejste přihlášen jako administrátor.");
+      window.location.href = "login.html";
+    }
+  </script>
 </head>
 <body>
-  <h1>Počet objednávek podle dne</h1>
-  <canvas id="ordersChart" width="600" height="300"></canvas>
+  <div>
+    <h1>Počet objednávek podle dne</h1>
+    <canvas id="ordersChart" width="600" height="300"></canvas>
+    <button onclick="logout()">Odhlásit se</button>
+  </div>
 
   <script type="module">
     import { db, ref, get, child } from './firebase.js';
@@ -52,17 +56,14 @@
         }
       }
     });
+  </script>
 
-
-    <button onclick="logout()">Odhlásit se</button>
-
-    
-      function logout() {
-        sessionStorage.removeItem("admin");
-        window.location.href = "login.html";
-      }
-
-
+  <!-- Logout script musí být mimo type="module" -->
+  <script>
+    function logout() {
+      sessionStorage.removeItem("isAdmin");
+      window.location.href = "login.html";
+    }
   </script>
 </body>
 </html>

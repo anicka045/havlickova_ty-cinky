@@ -3,51 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <title>Přihlášení do administrace</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f5f5f5;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
-    .login-box {
-      background: white;
-      padding: 30px;
-      border-radius: 10px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.2);
-      width: 300px;
-    }
-    h2 {
-      text-align: center;
-      color: #b71c1c;
-    }
-    input {
-      width: 100%;
-      padding: 10px;
-      margin: 10px 0;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-    }
-    button {
-      width: 100%;
-      padding: 10px;
-      background: #b71c1c;
-      color: white;
-      font-weight: 600;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-    }
-    button:hover {
-      background: #ff3b3b;
-    }
-    .error {
-      color: red;
-      text-align: center;
-    }
-  </style>
+  <link rel="stylesheet" href="styles.css">
+
 </head>
 <body>
 
@@ -65,8 +22,8 @@
       const password = document.getElementById('password').value;
 
       if (username === 'admin' && password === 'admin123') {
-        sessionStorage.setItem('admin', 'true');
-        window.location.href = 'admin.html'; // stránka se správou
+        sessionStorage.setItem('isAdmin', 'true');
+        window.location.href = 'admin.html';
       } else {
         document.getElementById('error').textContent = 'Neplatné přihlašovací údaje';
       }

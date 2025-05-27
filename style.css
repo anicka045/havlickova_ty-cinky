@@ -195,3 +195,57 @@ ul#cartList li button:hover {
 .top-bar button:hover {
   background: #ff3b3b;
 }
+
+/* ---- Přihlašovací box ---- */
+.login-box, form {
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  width: 300px;
+  margin: 0 auto;
+}
+
+.login-box h2, form h2 {
+  text-align: center;
+  color: #b71c1c;
+}
+
+.login-box input, form input[type="text"], form input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.login-box button, form button {
+  width: 100%;
+  padding: 10px;
+  background: #b71c1c;
+  color: white;
+  font-weight: 600;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.login-box button:hover, form button:hover {
+  background: #ff3b3b;
+}
+
+.error {
+  color: red;
+  text-align: center;
+}
+
+/* Zarovnání přihlašovací stránky */
+.login-page-body {
+  background: #f5f5f5;
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}

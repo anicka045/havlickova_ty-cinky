@@ -10,9 +10,10 @@ body {
 /* Nadpisový pruh */
 .headline-banner {
   width: 100%;
-  background: #ffe5e5;
+  background: #ffe5e5; /* Světle červený pruh */
   padding: 30px 0;
   text-align: center;
+  border-bottom: 4px solid #b71c1c; /* Tento řádek vytvoří výrazný spodní okraj = pruh */
 }
 
 .headline-banner h1 {
@@ -21,6 +22,7 @@ body {
   color: #b71c1c;
   font-weight: 700;
 }
+
 
 /* Header - fixní záhlaví */
 header {

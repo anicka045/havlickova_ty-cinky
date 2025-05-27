@@ -261,6 +261,9 @@ ul#cartList li button:hover {
   justify-content: center;
   align-items: center;
 }
+.hero h1 {
+  margin: 0;
+}
 
 .login-btn {
   position: absolute;

@@ -1,37 +1,25 @@
 /* Základní styly */
-html, body {
+body {
   margin: 0;
   padding: 0;
-  height: 100%;
-  background: #f5f5f5; /* světlé neutrální pozadí */
+  background: #f5f5f5;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  color: #222; /* tmavý text */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+  color: #222;
 }
 
-body {
-  margin: 20px; /* margin navíc z původního styles.css */
-}
-
-/* Nadpisy */
-h1, h2 {
-  color: #b71c1c; /* sytě červená */
-  font-weight: 700;
-}
-
-h1 {
+/* Nadpisový pruh */
+.headline-banner {
+  width: 100%;
+  background: #ffe5e5;
+  padding: 30px 0;
   text-align: center;
-  font-size: 2.8em;
-  margin-top: 60px;
-  background: #222; /* tmavé pozadí */
-  color: #ff3b3b; /* jasná červená */
-  padding: 20px 30px;
-  border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(183, 28, 28, 0.6);
-  display: inline-block;
+}
+
+.headline-banner h1 {
+  margin: 0;
+  font-size: 3em;
+  color: #b71c1c;
+  font-weight: 700;
 }
 
 /* Header - fixní záhlaví */
@@ -41,7 +29,7 @@ header {
   left: 50%;
   transform: translateX(-50%);
   width: 900px;
-  height: 70px;           
+  height: 70px;
   padding: 20px 0;
   background: #000;
   border-radius: 12px;
@@ -51,7 +39,7 @@ header {
   font-weight: 700;
   font-size: 2.2em;
   z-index: 1000;
-  line-height: 30px;       
+  line-height: 30px;
   box-sizing: border-box;
 }
 
@@ -67,7 +55,6 @@ form {
   gap: 40px;
 }
 
-/* Sloupce ve formuláři */
 .column {
   flex: 1;
   display: flex;
@@ -75,18 +62,18 @@ form {
 }
 
 form > .column:last-child {
-  margin-top: 20px; /* nebo uprav na kolik chceš */
+  margin-top: 20px;
 }
 
 /* Popisky formuláře */
 label {
   display: block;
-  margin: 10px 0 6px; /* změna z původního 12px na 10px, aby sedělo s původním stylem */
+  margin: 10px 0 6px;
   font-weight: 600;
   color: #b71c1c;
 }
 
-/* Vstupy a textarea */
+/* Vstupy */
 input[type="text"],
 input[type="email"],
 select,
@@ -94,7 +81,7 @@ textarea {
   width: 100%;
   padding: 8px 12px;
   border-radius: 6px;
-  border: 1px solid #b71c1c; /* sjednoceno na barvu z původního styles.css */
+  border: 1px solid #b71c1c;
   font-size: 1em;
   color: #222;
   font-weight: 500;
@@ -103,8 +90,8 @@ textarea {
   font-family: inherit;
 }
 
-input[type="text"][name="name"],
-input[type="text"][name="surname"] {
+input[name="name"],
+input[name="surname"] {
   max-width: 250px;
 }
 
@@ -153,29 +140,25 @@ button:hover {
   box-shadow: 0 0 12px rgba(0,0,0,0.1);
 }
 
-/* Nadpis souhrnu */
 #orderSummary h2 {
   margin-top: 0;
   font-weight: 700;
   color: #d32f2f;
 }
 
-/* Seznam položek v souhrnu */
 #orderSummary ul {
   list-style: none;
   padding-left: 0;
   margin: 0;
 }
 
-/* Položky seznamu */
 #orderSummary li {
   margin-bottom: 8px;
   border-bottom: 1px solid #ef9a9a;
   padding-bottom: 6px;
 }
 
-/* Ostatní styly z původního styles.css pro kontext e-shopu */
-/* (pokud nechceš, můžeš je případně vyjmout) */
+/* Produkty */
 .products-grid {
   display: flex;
   gap: 15px;
@@ -218,6 +201,24 @@ button:hover {
   font-weight: 600;
 }
 
+/* Košík */
+.container {
+  display: flex;
+  gap: 30px;
+  align-items: flex-start;
+}
+
+.cart {
+  width: 300px;
+  background: #fff;
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(183, 28, 28, 0.2);
+  position: sticky;
+  top: 20px;
+  height: fit-content;
+}
+
 ul {
   list-style: none;
   padding-left: 0;
@@ -238,46 +239,7 @@ ul#cartList li button:hover {
   background: #ff3b3b;
 }
 
-.container {
-  display: flex;
-  gap: 30px;
-  align-items: flex-start;
-}
-
-.cart {
-  width: 300px;
-  background: #fff;
-  padding: 15px;
-  border-radius: 12px;
-  box-shadow: 0 0 10px rgba(183, 28, 28, 0.2);
-  position: sticky;
-  top: 20px;
-  height: fit-content;
-}
-
-.hero {
-  height: 100vh;
-  display: flex;
-  justify-content: center;  /* horizontálně do středu */
-  align-items: center;      /* vertikálně do středu */
-  background: #f5f5f5;
-}
-
-.center-box {
-  background: #222;         /* tmavé pozadí boxu */
-  color: #ff3b3b;           /* jasná červená pro text */
-  padding: 40px 60px;
-  border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(183, 28, 28, 0.6);
-  text-align: center;
-}
-
-.center-box h1 {
-  margin: 0;
-  font-size: 2.8em;
-  font-weight: 700;
-}
-
+/* Přihlášení */
 .login-btn {
   position: absolute;
   top: 20px;
@@ -319,7 +281,7 @@ ul#cartList li button:hover {
   background: #ff3b3b;
 }
 
-/* Přihlašovací box i formuláře */
+/* Login box a formuláře */
 .login-box, form {
   background: white;
   padding: 30px;
@@ -334,7 +296,9 @@ ul#cartList li button:hover {
   color: #b71c1c;
 }
 
-.login-box input, form input[type="text"], form input[type="password"] {
+.login-box input,
+form input[type="text"],
+form input[type="password"] {
   width: 100%;
   padding: 10px;
   margin: 10px 0;
@@ -343,7 +307,8 @@ ul#cartList li button:hover {
   font-size: 1em;
 }
 
-.login-box button, form button {
+.login-box button,
+form button {
   width: 100%;
   padding: 10px;
   background: #b71c1c;
@@ -355,7 +320,8 @@ ul#cartList li button:hover {
   transition: background 0.3s ease;
 }
 
-.login-box button:hover, form button:hover {
+.login-box button:hover,
+form button:hover {
   background: #ff3b3b;
 }
 
@@ -364,7 +330,6 @@ ul#cartList li button:hover {
   text-align: center;
 }
 
-/* Zarovnání přihlašovací stránky */
 .login-page-body {
   background: #f5f5f5;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -373,18 +338,4 @@ ul#cartList li button:hover {
   align-items: center;
   height: 100vh;
   margin: 0;
-}
-
-
-.headline-banner {
-  background-color: #f0f0f0; /* Světle šedá, můžeš změnit dle designu */
-  padding: 20px 0;
-  text-align: center;
-  width: 100%;
-}
-
-.headline-banner h2 {
-  margin: 0;
-  font-size: 2rem;
-  color: #333;
 }

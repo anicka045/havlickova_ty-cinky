@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8" />
+  <title>Přihlášení správce</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f5f5f5;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 100px;
+    }
+
+    form {
+      background: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 12px rgba(0,0,0,0.15);
+      width: 300px;
+    }
+
+    h2 {
+      margin-top: 0;
+      color: #b71c1c;
+    }
+
+    label {
+      font-weight: 600;
+      margin-top: 10px;
+      display: block;
+    }
+
+    input[type="text"], input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      background: #b71c1c;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #ff3b3b;
+    }
+  </style>
+</head>
+<body>
+  <form id="loginForm">
+    <h2>Přihlášení admina</h2>
+    <label for="username">Uživatelské jméno:</label>
+    <input type="text" id="username" required />
+    <label for="password">Heslo:</label>
+    <input type="password" id="password" required />
+    <button type="submit">Přihlásit se</button>
+  </form>
+
+  <script>
+    document.getElementById("loginForm").onsubmit = (e) => {
+      e.preventDefault();
+      const username = document.getElementById("username").value;
+      const password = document.getElementById("password").value;
+
+      if (username === "admin" && password === "admin123") {
+        sessionStorage.setItem("isAdmin", "true");
+        window.location.href = "index.html";
+      } else {
+        alert("Neplatné přihlašovací údaje.");
+      }
+    };
+  </script>
+</body>
+</html>

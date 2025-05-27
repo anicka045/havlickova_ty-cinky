@@ -374,3 +374,17 @@ ul#cartList li button:hover {
   height: 100vh;
   margin: 0;
 }
+
+
+.headline-banner {
+  background-color: #f0f0f0; /* Světle šedá, můžeš změnit dle designu */
+  padding: 20px 0;
+  text-align: center;
+  width: 100%;
+}
+
+.headline-banner h2 {
+  margin: 0;
+  font-size: 2rem;
+  color: #333;
+}

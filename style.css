@@ -154,3 +154,20 @@ ul#cartList li button:hover {
   justify-content: center;
   align-items: center;
 }
+
+.login-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background-color: #b71c1c;
+  color: white;
+  padding: 10px 18px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+.login-btn:hover {
+  background-color: #ff3b3b;
+}

@@ -228,6 +228,30 @@ canvas {
   font-size: 16px;
 }
 
+  .top-bar {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px 20px;
+    box-sizing: border-box;
+  }
+
+  .top-bar button {
+    background: #b71c1c;
+    border: none;
+    padding: 8px 16px;
+    color: white;
+    font-weight: 600;
+    border-radius: 5px;
+    margin-left: 10px;
+    cursor: pointer;
+  }
+
+  .top-bar button:hover {
+    background: #ff3b3b;
+  }
+
+
 </style>
 </head>
 <body>
@@ -240,15 +264,12 @@ canvas {
   </div>
   
   
-<div class="top-bar">
-  <button onclick="window.location.href='admin-login.html'">Přihlásit se</button>
-</div>
-
 
 <div class="top-bar">
-  <button onclick="window.location.href='admin-login.html'">Přihlásit se</button>
-  <button id="logoutBtn" style="display: none; margin-left: 10px;">Odhlásit se</button>
+  <button id="loginBtn">Přihlásit se</button>
+  <button id="logoutBtn" style="display: none;">Odhlásit se</button>
 </div>
+
 
 
 <div class="hero">
@@ -451,21 +472,37 @@ canvas {
 });
 
 
-
   const isAdmin = sessionStorage.getItem("isAdmin") === "true";
+  const loginBtn = document.getElementById("loginBtn");
+  const logoutBtn = document.getElementById("logoutBtn");
 
   if (isAdmin) {
+    loginBtn.style.display = "none";
+    logoutBtn.style.display = "inline-block";
+
+    // Zobraz admin funkce (např. přidat tlačítka pro mazání produktů)
     document.querySelectorAll(".product").forEach(product => {
       const removeBtn = document.createElement("button");
       removeBtn.textContent = "Odebrat";
       removeBtn.style.marginTop = "8px";
       removeBtn.onclick = () => {
         alert("Zde bude funkce pro odebrání produktu.");
-        // Tady můžeš později implementovat mazání z databáze
       };
       product.appendChild(removeBtn);
     });
+  } else {
+    loginBtn.style.display = "inline-block";
+    logoutBtn.style.display = "none";
   }
+
+  loginBtn.onclick = () => {
+    window.location.href = "admin-login.html";
+  };
+
+  logoutBtn.onclick = () => {
+    sessionStorage.removeItem("isAdmin");
+    window.location.href = "index.html";
+  };
 
 
 </script>
